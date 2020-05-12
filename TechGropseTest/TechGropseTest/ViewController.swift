@@ -77,7 +77,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var eventPerformerPlusImageView: UIImageView!
     
-    
     @IBOutlet weak var eventSeatingPlanView: UIView!
     
     @IBOutlet weak var eventSeatingPlanPlusImageView: UIImageView!
@@ -89,22 +88,72 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        WebServiceManager.callPostServiceToGetData { (EventModel) in
+            print(EventModel)
+        }
     }
-    
     
     
     @IBAction func eventOrganizerBtnTapped(_ sender: Any) {
+        
+        let button = sender as! UIButton
+        if  button.isSelected == false{
+            button.isSelected = true
+            eventOrganizerDescriptionView.isHidden = false
+            eventOrganizerPlusImageView.image = UIImage.init(systemName: "minus")
+        }
+        else
+        {
+            button.isSelected = false
+            eventOrganizerDescriptionView.isHidden = true
+            eventOrganizerPlusImageView.image = UIImage.init(systemName: "plus")
+        }
     }
     
-    
     @IBAction func eventSponsersBtnTapped(_ sender: Any) {
+        let button = sender as! UIButton
+        if  button.isSelected == false{
+            button.isSelected = true
+            eventSponsersDescriptionView.isHidden = false
+            eventSponsersPlusImageView.image = UIImage.init(systemName: "minus")
+        }
+        else
+        {
+            button.isSelected = false
+            eventSponsersDescriptionView.isHidden = true
+            eventSponsersPlusImageView.image = UIImage.init(systemName: "plus")
+        }
     }
     
     @IBAction func eventPerformerBtnTapped(_ sender: Any) {
+        let button = sender as! UIButton
+        if  button.isSelected == false{
+            button.isSelected = true
+            eventPerformerDescriptionView.isHidden = false
+            eventPerformerPlusImageView.image = UIImage.init(systemName: "minus")
+        }
+        else
+        {
+            button.isSelected = false
+            eventPerformerDescriptionView.isHidden = true
+            eventPerformerPlusImageView.image = UIImage.init(systemName: "plus")
+        }
     }
     
     @IBAction func eventSeatingPlanBtnTapped(_ sender: Any) {
+        let button = sender as! UIButton
+        if  button.isSelected == false{
+            button.isSelected = true
+            eventSeatingPlanDescriptionView.isHidden = false
+            eventSeatingPlanPlusImageView.image = UIImage.init(systemName: "minus")
+        }
+        else
+        {
+            button.isSelected = false
+            eventSeatingPlanDescriptionView.isHidden = true
+            eventSeatingPlanPlusImageView.image = UIImage.init(systemName: "plus")
+        }
     }
     
     
