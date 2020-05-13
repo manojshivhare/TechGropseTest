@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UIGestureRecognizerDelegate {
     
     @IBOutlet weak var headerView: UIView!
     
@@ -119,7 +119,32 @@ class ViewController: UIViewController {
             self.eventAddressLAbel.text = self.eventDic?.data?.ev_country
             self.eventLandmarkLabel.text = self.eventDic?.data?.ev_region
             self.eventDescriptionTextView.text = self.eventDic?.data?.ev_description
+            self.postDistanceLabel.text = self.eventDic?.data?.distance
+            
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.openMapForPlace))
+            gestureRecognizer.delegate = self
+            self.eventMapView.addGestureRecognizer(gestureRecognizer)
         }
+        
+    }
+    
+    //MARK: Open Map onTap of it
+    @objc func openMapForPlace() {
+
+        let latitude: CLLocationDegrees = Double((self.eventDic?.data?.ev_lat)!)!
+        let longitude: CLLocationDegrees = Double((self.eventDic?.data?.ev_long)!)!
+
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Place Name"
+        mapItem.openInMaps(launchOptions: options)
         
     }
     
