@@ -104,8 +104,22 @@ class ViewController: UIViewController {
             }
         }
         
-        self.PostTitleLabel.text = eventDic?.data?.ev_title
-        self.postTitleDescriptionLabel.text = eventDic?.data?.ev_title_ar
+        DispatchQueue.main.async {
+            self.PostTitleLabel.text = self.eventDic?.data?.ev_title
+            self.postTitleDescriptionLabel.text = self.eventDic?.data?.ev_title_ar
+            self.postLikeCountLabel.text = self.eventDic?.data?.ev_like
+            self.postViewCountLabel.text = self.eventDic?.data?.ev_views
+            //self.postGroupCountLabel.text = self.eventDic?.data.ev
+            self.eventGenderLabel.text = self.eventDic?.data?.ev_gender
+            self.eventTimeLabel.text =  String(format: "%@ - %@",(self.eventDic?.data?.ev_start_time)!,(self.eventDic?.data?.ev_end_time)!)
+            self.eventDateLabel.text = String(format: "%@ - %@",(self.eventDic?.data?.ev_start_date)!,(self.eventDic?.data?.ev_end_date)!)
+            self.eventLanguageLabel.text = self.eventDic?.data?.ev_language
+            self.eventGenderLabel.text = self.eventDic?.data?.ev_gender
+            self.eventAgeLabel.text = self.eventDic?.data?.ev_age_id
+            self.eventAddressLAbel.text = self.eventDic?.data?.ev_country
+            self.eventLandmarkLabel.text = self.eventDic?.data?.ev_region
+            self.eventDescriptionTextView.text = self.eventDic?.data?.ev_description
+        }
         
     }
     
