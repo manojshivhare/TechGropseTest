@@ -12,19 +12,19 @@ public struct WebServiceManager {
 
     static func callPostServiceToGetData(complitionHandler: @escaping (EventModel)->()){
         guard let serviceUrl = URL(string: "http://saudicalendar.com/api/user/getEventDetail") else { return }
-        let parameterDictionary = NSMutableDictionary()
-        parameterDictionary.setValue(12, forKey: "event_id")
-        parameterDictionary.setValue(00, forKey: "user_id")
-        parameterDictionary.setValue(28.1245, forKey: "latitude")
-        parameterDictionary.setValue(78.1245, forKey: "longitude")
+        
+        let parameterDictionary: [String: Any] = [
+            "event_id": 12,
+            "user_id": 00,
+            "latitude":28.1245,
+            "longitude":78.1245
+        ]
             
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
-            return
-        }
-        request.httpBody = httpBody
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        let postString = self.getPostString(params: parameterDictionary)
+        request.httpBody = postString.data(using: .utf8)
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -38,5 +38,15 @@ public struct WebServiceManager {
                 }
             }
         }.resume()
+    }
+    
+    static func getPostString(params:[String:Any]) -> String
+    {
+        var data = [String]()
+        for(key, value) in params
+        {
+            data.append(key + "=\(value)")
+        }
+        return data.map { String($0) }.joined(separator: "&")
     }
 }

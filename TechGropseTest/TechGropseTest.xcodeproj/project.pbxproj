@@ -24,6 +24,7 @@
 		372EDBAD24698D3D00B222DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 372EDBAB24698D3D00B222DD /* Main.storyboard */; };
 		372EDBAF24698D4100B222DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 372EDBAE24698D4100B222DD /* Assets.xcassets */; };
 		372EDBB224698D4100B222DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 372EDBB024698D4100B222DD /* LaunchScreen.storyboard */; };
+		374AB6E3246BD50E0051C130 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374AB6E2246BD50E0051C130 /* EventViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		372EDBAE24698D4100B222DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		372EDBB124698D4100B222DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		372EDBB324698D4100B222DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		374AB6E2246BD50E0051C130 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,9 @@
 		372EDBA424698D3D00B222DD /* TechGropseTest */ = {
 			isa = PBXGroup;
 			children = (
+				374AB6E1246BD4F30051C130 /* ViewModel */,
 				37072562246AA06C00255A70 /* Model */,
+				37072560246A977F00255A70 /* ServiceManager.swift */,
 				372EDBA524698D3D00B222DD /* AppDelegate.swift */,
 				372EDBA724698D3D00B222DD /* SceneDelegate.swift */,
 				372EDBA924698D3D00B222DD /* ViewController.swift */,
@@ -103,9 +107,16 @@
 				372EDBAE24698D4100B222DD /* Assets.xcassets */,
 				372EDBB024698D4100B222DD /* LaunchScreen.storyboard */,
 				372EDBB324698D4100B222DD /* Info.plist */,
-				37072560246A977F00255A70 /* ServiceManager.swift */,
 			);
 			path = TechGropseTest;
+			sourceTree = "<group>";
+		};
+		374AB6E1246BD4F30051C130 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				374AB6E2246BD50E0051C130 /* EventViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +203,7 @@
 				37072575246AA07F00255A70 /* Ev_image.swift in Sources */,
 				37072561246A977F00255A70 /* ServiceManager.swift in Sources */,
 				37072578246AB32F00255A70 /* EventModel.swift in Sources */,
+				374AB6E3246BD50E0051C130 /* EventViewModel.swift in Sources */,
 				37072571246AA07F00255A70 /* Event_performer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

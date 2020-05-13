@@ -83,15 +83,30 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var eventSeatingPlanDescriptionView: UIView!
     
-    
-    
-    
+    var eventDic:EventViewModel?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        WebServiceManager.callPostServiceToGetData { (EventModel) in
-            print(EventModel)
+        WebServiceManager.callPostServiceToGetData { (eventModel) in
+            self.eventDic = EventViewModel(model:eventModel)
+            self.setUpLabelValues()
         }
+    }
+    
+    func setUpLabelValues(){
+        let imagurlArr = eventDic?.data?.ev_image!
+        for item in imagurlArr! {
+            if let imageurl = item.image {
+                getDataFromImageURL(from: URL(string: imageurl)!) { (image) in
+                    self.bannerImageView.image = image
+                }
+            }
+        }
+        
+        self.PostTitleLabel.text = eventDic?.data?.ev_title
+        self.postTitleDescriptionLabel.text = eventDic?.data?.ev_title_ar
+        
     }
     
     
@@ -156,6 +171,19 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    //MARK: Download image from URL
+      func getDataFromImageURL(from url: URL, completionBlock: @escaping (UIImage) -> ()) {
+          URLSession.shared.dataTask(with: url) { (data, response, error) in
+          guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data) else    {
+                      return
+                  }
+                  DispatchQueue.main.async() { () -> Void in
+                      completionBlock(image)
+                  }
+                }.resume()
+      }
 }
 
